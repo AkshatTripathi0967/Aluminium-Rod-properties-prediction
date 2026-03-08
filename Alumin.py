@@ -83,7 +83,7 @@ with col8:
     )
 
 st.divider()
-def create_input_dataframe(a,b,c,d,e,f,g,h,i,j,k,l,m):
+def create_input_dataframe():
   new_data = pd.DataFrame(columns=X.columns)
   new_data.loc[0]=0.0
   new_data["Cu_Content"]=Cu_Content
