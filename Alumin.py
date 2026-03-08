@@ -9,25 +9,23 @@ st.set_page_config(page_title="Wire Rod Casting Predictor", layout="wide")
 st.title("⚙️ Wire Rod Casting Parameter Predictor")
    
 df = pd.read_excel("wire_rod_casting_parameters_100k_realistic.csv.xlsx")
-
-X = df.drop(["UTS_MPa","Elongation","Conductivity_IACS"],axis = 1)
-y = df[["UTS_MPa","Elongation","Conductivity_IACS"]]
+def model_creation():
+   X = df.drop(["UTS_MPa","Elongation","Conductivity_IACS"],axis = 1)
+   y = df[["UTS_MPa","Elongation","Conductivity_IACS"]]
 
  
-poly = PolynomialFeatures(degree=2)
-X_poly = poly.fit_transform(X)
+   poly = PolynomialFeatures(degree=2)
+   X_poly = poly.fit_transform(X)
 
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X_poly)
-
-  
-model = linear_model.LinearRegression()
-model.fit(X_scaled,y)
-
-
+   scaler = StandardScaler()
+   X_scaled = scaler.fit_transform(X_poly)
 
   
+   model = linear_model.LinearRegression()
+   model.fit(X_scaled,y)
+   return model
+model = model_creation()
 st.markdown("Enter the process parameters below to predict casting performance.")
 
 st.divider()
